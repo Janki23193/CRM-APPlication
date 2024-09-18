@@ -11,8 +11,8 @@ namespace InternshipApp.Repos.Classes
 {
     public class StoreRepository : IStoreRepository
     {
-        private readonly DbCntext _db;
-        public StoreRepository(DbCntext db)
+        private readonly ApplicationDbContext _db;
+        public StoreRepository(ApplicationDbContext db)
         {
             _db = db;
         }

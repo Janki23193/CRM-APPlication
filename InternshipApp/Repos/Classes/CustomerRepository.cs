@@ -11,8 +11,8 @@ namespace InternshipApp.Repos.Classes
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly DbCntext _dbcontext;
-        public CustomerRepository(DbCntext db)
+        private readonly ApplicationDbContext _dbcontext;
+        public CustomerRepository(ApplicationDbContext db)
         {
             _dbcontext = db;
         }

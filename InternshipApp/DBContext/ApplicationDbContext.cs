@@ -1,4 +1,6 @@
 ﻿using InternshipApp.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace InternshipApp.DBContext
 {
-    public class DbCntext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     { 
-        public DbCntext(DbContextOptions<DbCntext> options): 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): 
             base(options)
         {
 

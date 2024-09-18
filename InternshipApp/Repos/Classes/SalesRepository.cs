@@ -12,8 +12,8 @@ namespace InternshipApp.Repos.Classes
 {
     public class SalesRepository : ISalesRepository
     {
-        private readonly DbCntext _dbcontext;
-        public SalesRepository(DbCntext dbcontext)
+        private readonly ApplicationDbContext _dbcontext;
+        public SalesRepository(ApplicationDbContext dbcontext)
         {
             _dbcontext = dbcontext;
         }

@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using InternshipApp.Repos.Interfaces;
 using InternshipApp.Repos.Classes;
+using Microsoft.AspNetCore.Identity;
+using InternshipApp.Models;
 
 namespace InternshipApp
 {
@@ -26,15 +28,20 @@ namespace InternshipApp
         {
 
             services.AddControllersWithViews();
-            services.AddDbContext<DbCntext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")));
+            //register Identity services to the project like user management and roles like admin and so on
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("default")));
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<ISalesRepository, SalesRepository>();
             services.AddControllersWithViews()
-     .AddNewtonsoftJson(options =>
-     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
- );
+             .AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+             );
             services.AddCors(builder => builder.AddPolicy("Corspolicy", option => option.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
             // In production, the React files will be served from this directory
@@ -77,7 +84,8 @@ namespace InternshipApp
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    //spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
         }

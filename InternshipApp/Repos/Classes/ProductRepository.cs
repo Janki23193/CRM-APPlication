@@ -11,9 +11,9 @@ namespace InternshipApp.Repos.Classes
 {
     public class ProductRepository : IProductRepository
     {
-        protected readonly DbCntext _dbcontext;
+        protected readonly ApplicationDbContext _dbcontext;
 
-        public ProductRepository(DbCntext db)
+        public ProductRepository(ApplicationDbContext db)
         {
             _dbcontext = db;        
         }
